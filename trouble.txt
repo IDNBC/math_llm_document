@@ -1,0 +1,67 @@
+1.自宅PCでVScodeからこのリポジトリを作成してファイルをコミットしようとしたときに、他のリポジトリも表示されていてどうやって現在作業しているリポジトリだけをコミットするのか戸惑いましたが、Desktopと表示されたリポジトリだけ閉じることができて解決しました。
+
+2.文字の折り返しの設定を変更しようとしましたが、以前VScodeにLaTexを導入しようとしてAI任せで設定をいろいろいじっていたのが原因で上手く設定できませんでした。設定関係のjsonファイルに問題があったようで、AIに聞いたら以下のコードを修正してくれました。↓のは問題のあるコードです。
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": false,
+    "diffEditor.renderSideBySide": false,
+    "git.openRepositoryInParentFolders": "never"
+}
+
+{
+    "latex-workshop.latex.tools": 
+    [
+        {
+            "name": "latexmk", 
+            "command": "latexmk", 
+            "args": 
+            [
+                "-pdfdvi", 
+                "%DOC%", 
+            ],
+        },
+    ],
+    "latex-workshop.latex.recipes": 
+    [
+        {
+            "name": "latexmk", 
+            "tools": 
+            [
+                "latexmk", 
+            ]
+        },
+    ],
+    "latex-workshop.latex.clean.fileTypes": 
+    [
+        "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot", "*.out", "*.toc", "*.acn", "*.acr", "*.alg", 
+        "*.glg", "*.glo", "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.synctex.gz", 
+        "_minted*", "*.nav", "*.snm", "*.vrb", 
+    ],
+    "latex-workshop.latex.clean.enabled": true,
+    "latex-workshop.latex.autoClean.run": "onFailed", 
+    "latex-workshop.latex.autoBuild.run": "onFileChange", 
+    "latex-workshop.synctex.afterBuild.enabled": true, 
+    "latex-workshop.view.pdf.viewer": "tab",
+    "tabnine.experimentalAutoImports": true,
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 1,
+    
+}
+
+{
+    "terminal.integrated.defaultEncoding": "utf8",
+    "files.encoding": "utf8"
+}
+
+
+{
+    "python.defaultInterpreterPath": "C:\\Users\\Owner\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+}
+
+{
+    "code-runner.runInTerminal": true
+}
+
