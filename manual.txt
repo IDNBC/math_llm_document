@@ -1,0 +1,10 @@
+1.LaTex形式とSymPy形式での記述に対応したトークナイザーを用意する
+pip install sentencepiece
+でsentencepieceというトークナイザーをインストールする。
+input.txtという名前で対応させたいLaTexなどの記述形式のファイルを用意する。
+事前に作成しておいた「一次式の定数倍.json」ファイル名をlinear.jsonにしておく。
+json_to_jsonl.pyのファイルで変換元をlinear.jsonに指定して実行。
+input.txtファイルも作成されるので、このinput.txtを使い、sentence2.pyでファイルをinput.txt指定して実行する。
+sentence2.pyのvocab_size=100,の設定が大きすぎるとエラーが出る可能性がある。実際にAIに出力してもらったコードは最初1000になっていて実行したらエラーが出ました。
+sentence2.pyを実行すると、2つのファイルができる。
+math_topkenizer.modelとmath_tokenizer.vocabができる。

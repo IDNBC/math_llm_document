@@ -65,3 +65,15 @@
     "code-runner.runInTerminal": true
 }
 
+3.仮想環境の起動トラブル
+実習用PCでpythonの仮想環境を作ろうとした際にターミナルからコマンドで起動しようとしても上手くいかなかった。
+cd ~\Desktop\project
+Remove-Item -Recurse -Force .\venv
+python -m venv venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
+このコマンド群を実行することで仮想環境の構築と起動まで一括でできました。2回目以降は
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
+の2つだけでよいです。powershellの実行ポリシーに問題があるようです。家のPCでは起きなかったのに実習用PCではどうして起きたのかは分かりません。時間があれば振り返った際に調べてください。
+
