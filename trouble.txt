@@ -75,5 +75,5 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 このコマンド群を実行することで仮想環境の構築と起動まで一括でできました。2回目以降は
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 .\venv\Scripts\Activate.ps1
-の2つだけでよいです。powershellの実行ポリシーに問題があるようです。家のPCでは起きなかったのに実習用PCではどうして起きたのかは分かりません。時間があれば振り返った際に調べてください。
-
+の2つだけでよいです。
+これはAIによるとPowershellのスクリプト実行ポリシーが問題になっているそうで、一時的に緩和して仮想環境を起動するコマンドだそうです。

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Muses AI</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button id="toggleSidebar">☰</button>
+            <ul id="historyList">
+                <li onclick="loadChat('チャット1')">チャット1</li>
+                <li onclick="loadChat('チャット2')">チャット2</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div id="chatDisplay" class="chat-display">
+                <p>ここにチャット内容が表示されます</p>
+            </div>
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="メッセージを入力..." />
+                <button onclick="sendMessage()">送信</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>

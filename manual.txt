@@ -7,4 +7,6 @@ json_to_jsonl.pyのファイルで変換元をlinear.jsonに指定して実行�
 input.txtファイルも作成されるので、このinput.txtを使い、sentence2.pyでファイルをinput.txt指定して実行する。
 sentence2.pyのvocab_size=100,の設定が大きすぎるとエラーが出る可能性がある。実際にAIに出力してもらったコードは最初1000になっていて実行したらエラーが出ました。
 sentence2.pyを実行すると、2つのファイルができる。
-math_topkenizer.modelとmath_tokenizer.vocabができる。
+math_tokenizer.modelとmath_tokenizer.vocabができる。
+math_tokenizer.vocabファイルの中を見ると、<unk>というのがあるがunknownのことで辞書にない単語の数が記述される。
+vocab.pyを実行する。
