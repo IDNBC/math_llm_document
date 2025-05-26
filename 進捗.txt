@@ -1,5 +1,47 @@
+5月25日
+https://colab.research.google.com/drive/1CKEn1XvMYoijL5dEWzu2d1yvlWhlAuM_?usp=sharing
+このGoogle Colabで数式データを少量だけ使い、Transformers ライブラリによる LLM の微調整を行った。
+dataset.select(range(1000))とdataset.select(range(5000))の2つで実験してみました。
+1000でやったときは、5+3の回答が3.5という結果になった。50+10も50になるなど間違いが観られた。
+5000では学習時間が体感で数倍～10倍くらいになったと思います。
+input_text = "1 + 1 ="に対して、
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+1 + 1 = 2.5$
+このように出力しました。
+Flaskを起動して保存したモデルに応答させるようにしたところ、答えは間違っていましたが入力に対してきちんと回答を送ってくるという動作は確認できました。
+今回はTransformerライブラリを使った微調整だったので、次はPyTorch学習まで実際に行い、精度のいい回答を出力できるようにデータなどを工夫していきます。
+モデルも一緒にGitHubのリモートリポジトリへプッシュしようとしたら出来ないといわれ、単体で100MBを超えるファイルは無理らしいとAIから聞きました。
+https://huggingface.co/nobuchiyo345/first-model
+このHugging Faceの自分のページに訓練したモデルをアップロードするところまでやりました。
+
 5月26日
 本日は簡単なデータセットを作りました。四則演算だけといっても2項だけの計算でも1桁同士や、1桁と2桁、2桁と1桁などがあります。
 また負の数を混ぜた場合に掛け算と割り算でも考えたり、小数を含めた場合といろいろあります。
 差しあたっては本日作ったもので学習してみるとして、この辺のデータ設計もしっかり練らねばなりません。
+以前にPyTorchの練習用で作った仮想環境とは別に作品制作のための仮想環境を構築するのに、
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+このコマンドを実行しました。PyTorchの公式サイトに載っていたものです。
+インストール済みのPyTorchのバージョンは、
+pip show torch
+で確認できます。
+自宅のPCではグローバルにインストールしているので、仮想環境は構築しません。
+
+5月27日
+https://dreamer-uma.com/beginner-how-to-use-pytorch/
+ここのサイトもなかなか勉強になりそう。
+単回帰モデルの場合ですが、PyTorchのフレームワークを使わないで実装しています。
+自宅の環境で上記のサイトのコードを動かしてみると、警告が出ました。
+
+\torch\utils\_pytree.py:185: FutureWarning: optree is installed but 
+the version is too old to support PyTorch Dynamo in C++ pytree. C++ py
+これは一部ですが、optreeがインストールしてあるけれどもバージョンがとても古いという。
+AIによると、import torchが実行されるとPyTorchの内部で torch.utils._pytree がインポートされる。
+C++最適化のために optree を探しに行く。optree のバージョンが古い → 警告を出す。
+という流れで起きたようです。
+ちなみに警告がどの行を起因として発生したかを調べるには、
+import warnings
+warnings.simplefilter("default")
+import torch
+print("torch version:", torch.__version__)
+このコードを先頭に書いておくといいらしい。torchは今回の場合に使っただけで、一般に調べる場合にはwarningsの方だけでよいと思います。
 
