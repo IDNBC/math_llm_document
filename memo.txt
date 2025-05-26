@@ -1,3 +1,4 @@
+5月25日
 https://colab.research.google.com/drive/1CKEn1XvMYoijL5dEWzu2d1yvlWhlAuM_?usp=sharing
 このGoogle Colabで数式データを少量だけ使い、Transformers ライブラリによる LLM の微調整を行った。
 dataset.select(range(1000))とdataset.select(range(5000))の2つで実験してみました。
@@ -7,11 +8,13 @@ input_text = "1 + 1 ="に対して、
 Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 1 + 1 = 2.5$
 このように出力しました。
-
 Flaskを起動して保存したモデルに応答させるようにしたところ、答えは間違っていましたが入力に対してきちんと回答を送ってくるという動作は確認できました。
 今回はTransformerライブラリを使った微調整だったので、次はPyTorch学習まで実際に行い、精度のいい回答を出力できるようにデータなどを工夫していきます。
-
 モデルも一緒にGitHubのリモートリポジトリへプッシュしようとしたら出来ないといわれ、単体で100MBを超えるファイルは無理らしいとAIから聞きました。
+https://huggingface.co/nobuchiyo345/first-model
+このHugging Faceの自分のページに訓練したモデルをアップロードするところまでやりました。
+
+
 
 
 PyTorchではtorchtextを利用して辞書を作成できる。
