@@ -45,3 +45,12 @@ import torch
 print("torch version:", torch.__version__)
 このコードを先頭に書いておくといいらしい。torchは今回の場合に使っただけで、一般に調べる場合にはwarningsの方だけでよいと思います。
 
+借りてきたPyTorchの解説書に正しいインストールの仕方が載っていました。
+公式webページからget startをクリックし、使っているOSなどを選択し、表示されるコマンドを使ってインストールするのが正しい手順のよう。
+自宅のPCではStable(2.7.0)、Windows、Pip、Python、CPUを選びました。
+自習用でもGPUを使う段階になったら仮想環境で正しい手順でインストールしなおして。
+
+
+5月28日
+PyTorchについて理解を深めるために『動かしながら学ぶPyTorchプログラミング入門』を読み始める。
+PyTorchのtensorやNumPyのndarrayの相互変換する意義など詳しく解説されていた。
