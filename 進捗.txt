@@ -48,7 +48,7 @@ print("torch version:", torch.__version__)
 借りてきたPyTorchの解説書に正しいインストールの仕方が載っていました。
 公式webページからget startをクリックし、使っているOSなどを選択し、表示されるコマンドを使ってインストールするのが正しい手順のよう。
 自宅のPCではStable(2.7.0)、Windows、Pip、Python、CPUを選びました。
-自習用でもGPUを使う段階になったら仮想環境で正しい手順でインストールしなおして。
+実習用PCでもGPUを使う段階になったら仮想環境で正しい手順でインストールしなおして。
 
 
 5月28日
@@ -69,3 +69,7 @@ GPUメモリが許す限りバッチサイズを大きくする。エポック�
 
 学習に時間がかかるとしてもチェックポイントを保存することで後から学習を再開することもできるようです。
 https://chat-demo.plamo.preferredai.jp/c/61b547dd-b1e9-4292-9eef-bffe6cc5e4ac
+
+https://github.com/zeyadusf/LLMs-from-Scratc
+では参考図書『Build a Large Language Model (from Scratch)』の解説がなされている。
+
