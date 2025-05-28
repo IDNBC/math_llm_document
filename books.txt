@@ -79,11 +79,18 @@ x = torch.tensor([1,2,3],[4,5,6], dtype=torch.float64)は64ビット浮動小数
 print(x.size())で形状の確認
 x = torch.arrange(0, 10)で0～9までの1次元配列生成
 x = torch.linspace(0, 10, 5)は0～10までを5つに分けた値で生成
-x = torch.rand(2, 3)で2×3行列に0～1の間の乱数を生成
-x = torch.zeros(2, 3)で2×3行列の全ての要素が0となる
+x = torch.rand(2, 3)で2×3テンソルに0～1の間の乱数を生成
+x = torch.zeros(2, 3)で2×3テンソルの全ての要素が0となる
 x = torch.ones(2, 3)で要素がすべて1のテンソルに
 
 x = torch.tensor([1,2,3]).to('cuda')でtoメソッドを使用してテンソルをGPUに転送
+
+x = torch.tensor([1,2,3],[4,5,6])でテンソルをつくり、
+x_reshape = x.view(3,2)で2×3テンソルがview関数で3×2テンソルに形状が変更される。
+
+テンソルの演算で気を付けたいこと。
+数学で扱う一般的な行列と異なり、Tensor同士の演算は対応する要素同士の積や商を計算する。
+
 
 
 2.[PyTorchのimport]
@@ -100,3 +107,17 @@ PyTorchにはそれらを変換しあうための関数が用意されている�
 tensor = torch.from_numpy(array)でndarrayからTensorへ変換
 tensor2array = tensor.numpy()でTensorからndarrayへ変換
 
+4.[自動微分 autograd]
+ニューラルネットワークの最適なパラメータ(重みのこと)を算出するために入力と出力の誤差が最小になるようにしたい。
+損失関数が最小になるようなパラメータを算出することになり、そこで微分が必要になる。
+PyTorchにはautogradパッケージがあり、テンソルの計算を自動で微分する機能がある。
+Tensorにはrequires_gradという属性があり、この属性がTrueの時、自動微分機能が有効になる。
+自動微分が有効なとき、Tensorは勾配情報を保持する。
+書籍ではテンソルとしてスカラーを3つ(a, b, x)用意し、y = ax + bを計算し、backwardメソッドで勾配を算出している。
+a=3, b=4, x=5とすると、 y = ax + bについて
+y.backward()でyに対して微分し勾配を算出
+yをaで微分すると、aは1にbは定数で消え、xは残る。よって、1 * x + 0 = 5
+yをbで微分すると、aとxは定数扱いで消え、bは1になる。よって、0 * 0 + 1 = 1
+yをxで微分すると、xは1にbは定数で消え、aは残る。よって、a * 1 + 0 = 3
+
+この書籍ではデフォルトではTrueになっているという説明文があったが、AIによるとtorch.tensor()ではデフォルトでrequires_grad=Falseという。
