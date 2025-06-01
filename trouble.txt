@@ -75,7 +75,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 このコマンド群を実行することで仮想環境の構築と起動まで一括でできました。2回目以降は
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 .\venv\Scripts\Activate.ps1
-の2つだけでよいです。
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv312\Scripts\Activate.ps1
+の2つだけでよいです。python3.12.7で作成したのでvenv312に命名しました。
 これはAIによるとPowershellのスクリプト実行ポリシーが問題になっているそうで、一時的に緩和して仮想環境を起動するコマンドだそうです。
 
 4.GitHubでの認証トラブル
@@ -87,3 +90,54 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 そのブラウザで認証を求められたので、認証を進めようとすると127.0.0.1へのリダイレクトに失敗。
 しかし、改めてGitHubを見ると昨日にpushしようとしたものがリモートに反映されていた。
 
+
+5.実習用PCでsentencepieceがインストールできない問題
+pythonの最新版3.13に対応していないようで、仮想環境を作成する際にpythonのバージョンを指定しておく必要があるらしい。
+家のPCではpython3.11～13(13は最後に入れた)まですべて入れていて、バージョン3.12で動いていてそれで問題が発生していなかった可能性がある。
+仮想環境を一度破棄し、再度作り直そうとするが古いバージョンのpythonをインストールしてパスを通していないといけないよう。
+仮想環境 (venv) は、実際にインストールされている Python 実行ファイル（例：python.exe）をコピー（またはリンク）して使うからだそう。
+python3.12.7を3.12系の最新のものをPASSを通さずにインストールし、仮想環境構築で
+py -3.12 -m venv venv312
+で作成し、
+pip install sentencepiece
+でインストールできました。やはりpythonのバージョンの問題だったようです。
+
+
+6.PyTorchのインストールとNVIDIAドライバー
+PyTorchは仮想環境をPython3.12.7で作り直し、
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+コマンドで入れ直しました。
+
+ドライバーは以下のようにコマンドで調べてAIからそれで大丈夫と言われました。
+C:\Users\iida>nvidia-smi
+Sun Jun  1 14:42:54 2025
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 528.92       Driver Version: 528.92       CUDA Version: 12.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ... WDDM  | 00000000:01:00.0 Off |                  N/A |
+| N/A   37C    P0     8W /  55W |      0MiB /  6144MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+
+立ち上げた仮想環境で
+python pytorch1.py
+のコマンドで、
+import torch
+print(torch.cuda.is_available())        # True ならGPU利用可能
+print(torch.cuda.get_device_name(0))   # GPU名が出るはず
+と記述したファイルを実行すると、
+True
+NVIDIA GeForce RTX 3050 6GB Laptop GPU
+のように出力され、正常に認識しているようです。

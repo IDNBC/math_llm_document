@@ -1,0 +1,158 @@
+###HTML
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Muses AI</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <button id="toggleSidebar">☰</button>
+            <ul id="historyList">
+                <li onclick="loadChat('チャット1')">チャット1</li>
+                <li onclick="loadChat('チャット2')">チャット2</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div id="chatDisplay" class="chat-display">
+                <p>ここにチャット内容が表示されます</p>
+            </div>
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="メッセージを入力..." />
+                <button onclick="sendMessage()">送信</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>
+
+###CSS
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 50px;
+    overflow: hidden;
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sidebar li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background-color: #444;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.chat-display {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.input-area button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+###JavaScript
+
+document.getElementById('toggleSidebar').onclick = () => {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+};
+
+function loadChat(title) {
+    document.getElementById('chatDisplay').innerHTML = `<h2>${title}</h2><p>チャット内容をここに表示</p>`;
+}
+
+async function sendMessage() {
+    const inputField = document.getElementById("userInput");
+    const message = inputField.value;
+
+    if (!message) return;
+
+    const responseElement = document.getElementById("chatDisplay");
+    responseElement.innerHTML += `<p>ユーザー: ${message}</p>`;
+
+    try {
+        const res = await fetch('/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+        });
+
+        const data = await res.json();
+
+        if (data.response) {
+            responseElement.innerHTML += `<p>AI: ${data.response}</p>`;
+        } else {
+            responseElement.innerHTML += `<p>エラー: ${data.error || "不明なエラー"}</p>`;
+        }
+
+    } catch (error) {
+        responseElement.innerHTML += `<p>エラーが発生しました: ${error.message}</p>`;
+    }
+
+    inputField.value = "";
+}
