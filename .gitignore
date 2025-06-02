@@ -1,0 +1,6 @@
+# 仮想環境を無視
+venv312/
+
+# Python のキャッシュ
+__pycache__/
+*.py[cod]
