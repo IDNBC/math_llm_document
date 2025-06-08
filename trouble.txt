@@ -141,3 +141,8 @@ print(torch.cuda.get_device_name(0))   # GPU名が出るはず
 True
 NVIDIA GeForce RTX 3050 6GB Laptop GPU
 のように出力され、正常に認識しているようです。
+
+7.VScodeの破損
+6月8日にGitでリモートにpushしてPCを閉じ、翌朝9日に開いたらVScodeのアイコンが白いファイルになっていて起動しようとするとcode.exeが見つからなくて起動できないといわれた。
+ショートカットを削除するか尋ねられたので削除した。
+VScodeを再インストールしたが、設定や拡張機能、Gitとの連携などは引き継がれるみたいで事なきを得た。
