@@ -145,3 +145,22 @@ PyTorchで学習させる際に使うコードの意味を一から学びまし�
 .gitignoreファイルをテキストファイルで作成し、それらをGitの追跡から外しました。
 それから変更を破棄し、もし問題があれば仮想環境は同じ名前で作り直します。
 仮想環境を起動してpytorch1.pyのコードを実行してみても特に問題はなさそうでした。
+
+6月7日
+割と新しめの書籍で「仕組みからわかる大規模言語モデル　生成AI時代のソフトウェア開発入門」を読み始めました。
+トークナイザーやマルチモーダルLLM向けのエンコーダなどの解説があり、LLM一般について理解するのに役立ちました。
+クエリ、キー、バリューの各行列や、それらをソフトマックス関数に入れる前に√D割ってやることで値が大きくなりすぎないように制御していることなども書かれていました。
+書籍から得た情報はbooks.txtにまとめます。
+
+学習用データセットのラベル付けなどに参考にしたかったMathPileはどうやってダウンロードするかがいまいちわからず代わりにMathQAというデータ群を見つけたのでそれを参考にするためフォルダを追加しました。
+https://huggingface.co/datasets/GAIR/MathPile
+How to download MathPile?
+Currently, we recommend that you download it locally from the command line (such as huggingface-cli) instead of the python function load_dataset("GAIR/MathPile") (due to a possible network issue), unpack the gz file, and then load the jsonl file. Some commands that might be helpful are as follows
+---------------------------------------------------------------------------------
+$ huggingface-cli download --resume-download --repo-type dataset GAIR/MathPile --local-dir /your/path/ --local-dir-use-symlinks False
+
+$ cd /your/path/
+$ find . -type f -name "*.gz" -exec gzip -d {} \;
+---------------------------------------------------------------------------------
+Later we will also support the datasets loading via load_dataset("GAIR/MathPile"). Stay tuned.
+
