@@ -1,5 +1,5 @@
 # 仮想環境を無視
-venv312/
+.venv/
 
 # Python のキャッシュ
 __pycache__/

@@ -49,7 +49,7 @@ import sentencepiece as spm
 # print(f"学習が完了しました。'{MODEL_PREFIX}.model' と '{MODEL_PREFIX}.vocab' が作成されました。")
 
 
-import sentencepiece as spm
+# import sentencepiece as spm
 
 # --- 設定 ---
 CORPUS_PATH = "corpus_for_tokenizer.txt"

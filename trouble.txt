@@ -166,3 +166,7 @@ train_tokenizer.pyファイルのVOCAB_SIZE = 300に修正して実行したら�
 
 最初に新しくgithubからcloneしたフォルダで作業してみると補完機能が使えて、仮想環境を構築しても同様に使えた。
 そのため問題は実習用PCのプロジェクト用フォルダで何かおかしなことになっていたことと思われる。
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+作り直した仮想環境がこちらのコマンドで起動できます。
+新規にcloneでリモートから持ってきたフォルダでGitの連携ができているのが確認できたので、古いのは削除する。
