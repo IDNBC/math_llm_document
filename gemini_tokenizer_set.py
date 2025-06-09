@@ -13,7 +13,7 @@ EOS_ID = 2
 UNK_ID = 3
 
 # SentencePieceモデルのパス (事前に学習させておく必要があります)
-TOKENIZER_MODEL_PATH = "arithmetic_tokenizer.model" # ご自身のモデルパスに変更してください
+TOKENIZER_MODEL_PATH = "math_tokenizer.model" # ご自身のモデルパスに変更してください
 
 def load_tokenizer(model_path=TOKENIZER_MODEL_PATH):
     """SentencePieceモデルをロードする関数"""

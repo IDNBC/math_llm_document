@@ -146,3 +146,13 @@ NVIDIA GeForce RTX 3050 6GB Laptop GPU
 6月8日にGitでリモートにpushしてPCを閉じ、翌朝9日に開いたらVScodeのアイコンが白いファイルになっていて起動しようとするとcode.exeが見つからなくて起動できないといわれた。
 ショートカットを削除するか尋ねられたので削除した。
 VScodeを再インストールしたが、設定や拡張機能、Gitとの連携などは引き継がれるみたいで事なきを得た。
+
+8.トークナイザー作成時のエラー
+実習用PCでは仮想環境内にSentencePieceを入れているので環境を起動する必要があります。
+実行したファイルtrain_tokenizer.pyを参照してほしいが、SentencePieceが内部で管理する特別なトークンをユーザ定義のトークンとしたAIの出力したコードでエラーが出た。
+f'--user_defined_symbols={PAD_TOKEN},{SOS_TOKEN},{EOS_TOKEN},{UNK_TOKEN},{NONE_TOKEN} '
+から{PAD_TOKEN},{SOS_TOKEN},{EOS_TOKEN},{UNK_TOKEN}まで削除することで正常に動作しました。
+
+次のエラーはVocabulary size is smaller than required_chars. 200 vs 287.
+これはエラーメッセージの一部ですが、語彙サイズを200に設定していて、サイズが足りなかったことを示している。
+train_tokenizer.pyファイルのVOCAB_SIZE = 300に修正して実行したらうまくいきました。

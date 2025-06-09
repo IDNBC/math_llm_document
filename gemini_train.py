@@ -6,13 +6,13 @@ import time
 import math
 import os # チェックポイント保存用
 
-from tokenizer_setup import load_tokenizer, get_vocab_size, PAD_ID, TOKENIZER_MODEL_PATH
+from gemini_tokenizer_setup import load_tokenizer, get_vocab_size, PAD_ID, TOKENIZER_MODEL_PATH
 from dataset import ArithmeticDataset, collate_fn
 from model import Seq2SeqTransformer
 
 # --- 設定 ---
 # データセットのパス
-DATASET_PATH = "dataset_all_combined3.jsonl" # ★★★ ご自身のデータセットパスに変更 ★★★
+DATASET_PATH = "data_set/dataset_all_combined3.jsonl" # ★★★ ご自身のデータセットパスに変更 ★★★
 
 # モデルパラメータ (model.pyのテスト時と同じ値を初期値として使用)
 EMB_SIZE = 128

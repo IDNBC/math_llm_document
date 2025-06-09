@@ -1,7 +1,7 @@
 import json
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
-from tokenizer_setup import load_tokenizer, SOS_ID, EOS_ID, PAD_ID, TOKENIZER_MODEL_PATH
+from gemini_tokenizer_setup import load_tokenizer, SOS_ID, EOS_ID, PAD_ID, TOKENIZER_MODEL_PATH
 import torch # pad_sequenceのためにtorchをインポート
 
 class ArithmeticDataset(Dataset):
