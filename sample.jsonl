@@ -1,0 +1,4 @@
+{"expr": "0 + 0", "answer": 0}
+{"expr": "0 - 0", "answer": 0}
+{"expr": "0 * 0", "answer": 0}
+{"expr": "0 / 0", "answer": "Zero\nDivisionError"}

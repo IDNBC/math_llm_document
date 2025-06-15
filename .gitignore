@@ -6,3 +6,7 @@ __pycache__/
 *.py[cod]
 
 .vscode
+
+# 訓練したモデルのフォルダを除外
+output_model/
+output_model1/
